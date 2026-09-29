@@ -1,0 +1,35 @@
+name: Windows11_Insider_Preview_amd64-latest
+
+on: workflow_dispatch
+#on: [push, pull_request]
+
+jobs:
+  Windows11_Insider_Preview_amd64-latest:
+    runs-on: windows-latest
+
+    steps:
+
+    # 检出本仓库
+    - name: Checkout repository
+      uses: actions/checkout@v5
+
+    # 制作ISO
+    - name: UUP dump WinISO
+      shell: cmd
+      run: |
+        dir
+        uup_download_windows.cmd
+
+    # 查看目录
+    - name: dir dir
+      shell: cmd
+      run: |
+        dir
+
+    # 上传镜像
+    - uses: actions/upload-artifact@v7
+      with:
+        name: Windows11_Insider_Preview_amd64-latest
+        path: "*.iso"
+        archive: false
+        compression-level: 0
